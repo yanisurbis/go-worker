@@ -21,8 +21,8 @@ func RunJobs(jobs []job, quotaLimit int, errorLimit int) {
 				<-quotaCh
 				return
 			}
-			failed := job()
-			if failed != nil {
+			err := job()
+			if err != nil {
 				atomic.AddUint32(timesFailed, 1)
 			}
 			<-quotaCh
